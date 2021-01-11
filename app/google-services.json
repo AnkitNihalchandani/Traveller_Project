@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "664329431391",
+    "project_id": "traveller-d7620",
+    "storage_bucket": "traveller-d7620.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664329431391:android:cd532efef5e2c42e802eea",
+        "android_client_info": {
+          "package_name": "com.alokrathava.traveller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664329431391-bj89o32ali22d2582l6r35cra553o7h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqS_YyeYKtsNvf3F6NDNV38bAd_FUOOf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664329431391-bj89o32ali22d2582l6r35cra553o7h7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
