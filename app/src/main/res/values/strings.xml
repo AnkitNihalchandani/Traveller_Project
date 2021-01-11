@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Traveller</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <!--    Register Activity-->
+    <string name="Register_title" translatable="false">Register</string>
+    <string name="Register_hint_name" translatable="false">Name</string>
+    <string name="Register_hint_email" translatable="false">Email</string>
+    <string name="Register_hint_password">Password</string>
+    <string name="Register_hint_phone" translatable="false">Mobile Number</string>
+    <string name="Register_btn_register" translatable="false">Register</string>
+
+    <!--    Login Activity-->
+    <string name="Login_title">Login</string>
+    <string name="Login_hint_email">Email</string>
+    <string name="Login_hint_password">Password</string>
+    <string name="Login_btn">Login</string>
+    <string name="login_link_forgotpass">Forgot Password?</string>
+
+    <!--    Forgot Password-->
+    <string name="Forgot_title">Forgot Password</string>
+    <string name="forgot_hint_email">Email</string>
+    <string name="forgot_hint_newpass">New Password</string>
+    <string name="forgot_hint_changepass">Update Password</string>
+
+
+</resources>
