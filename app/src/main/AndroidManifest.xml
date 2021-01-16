@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Traveller"
         android:usesCleartextTraffic="true">
-        <activity android:name=".dashboard.TaxiBook"></activity>
-        <activity android:name=".dashboard.DocWallet" />
-        <activity android:name=".dashboard.Baggage" />
         <activity android:name=".dashboard.Dashboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dashboard.AirTicketsWeb" />
+        <activity android:name=".dashboard.AirTicketsWeb"></activity>
         <activity android:name=".dashboard.TrainTicketWeb" />
         <activity android:name=".MainActivity" />
         <activity android:name=".auth.ForgotPass" />

@@ -29,9 +29,9 @@ public class AirTicketsWeb extends AppCompatActivity {
         setSupportActionBar(mtoolbar);
 
 
-        WebView myWebView = findViewById ( R.id.webview );
-        myWebView.setWebViewClient ( new WebViewClient ( ) );
-        myWebView.loadUrl ( "https://www.airvistara.com/in/en" );
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.loadUrl("http://www.airindia.in/");
 
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
