@@ -1,5 +1,6 @@
 package com.alokrathava.traveller.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -21,30 +22,30 @@ public class AirTicketsWeb extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_air_tickets_web);
+    protected void onCreate ( Bundle savedInstanceState ) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_air_tickets_web );
 
-        mtoolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mtoolbar);
+        mtoolbar = findViewById ( R.id.toolbar );
+        setSupportActionBar ( mtoolbar );
 
 
-        WebView myWebView = (WebView) findViewById(R.id.webview);
-        myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("http://www.airindia.in/");
+        WebView myWebView = findViewById ( R.id.webview );
+        myWebView.setWebViewClient ( new WebViewClient ( ) );
+        myWebView.loadUrl ( "http://www.airindia.in/" );
 
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        WebSettings webSettings = myWebView.getSettings ( );
+        webSettings.setJavaScriptEnabled ( true );
 
 
     }
 
     @Override
-    public void onBackPressed() {
-        if (mWebView.canGoBack()) {
-            mWebView.goBack();
+    public void onBackPressed () {
+        if (mWebView.canGoBack ( )) {
+            mWebView.goBack ( );
         } else {
-            super.onBackPressed();
+            startActivity ( new Intent ( AirTicketsWeb.this , Dashboard.class ) );
         }
     }
 }

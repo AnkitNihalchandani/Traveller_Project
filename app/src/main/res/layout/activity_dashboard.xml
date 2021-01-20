@@ -20,19 +20,19 @@
             android:layout_height="wrap_content"
             android:background="@color/primary_dark"
             app:title="Traveller"
-            app:titleMarginStart="10dp"
+            app:titleMarginStart="10sp"
             app:titleTextColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="30dp">
+            android:padding="20sp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="55sp"
                 android:background="@drawable/border">
 
                 <LinearLayout
@@ -105,7 +105,7 @@
                         android:textSize="18sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/pick_date_button"
+                        android:id="@+id/selectdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
