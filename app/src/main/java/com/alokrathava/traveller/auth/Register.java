@@ -28,40 +28,38 @@ public class Register extends AppCompatActivity {
 
     //    private FirebaseAuth mAuth;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    protected void onCreate ( Bundle savedInstanceState ) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_register );
 
-        mBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
-        View view = mBinding.getRoot();
-        setContentView(view);
+        mBinding = ActivityRegisterBinding.inflate ( getLayoutInflater ( ) );
+        View view = mBinding.getRoot ( );
+        setContentView ( view );
 //        mAuth = FirebaseAuth.getInstance();
 
+        mBinding.registerbtn.setOnClickListener ( v -> {
+            String Name = mBinding.Name.getText ( ).toString ( );
+            String Email = mBinding.Email.getText ( ).toString ( );
+            String Password = mBinding.Password.getText ( ).toString ( );
+            String Phone = mBinding.Phone.getText ( ).toString ( );
 
-        mBinding.registerbtn.setOnClickListener(v -> {
-
-            String Name = mBinding.Name.getText().toString();
-            String Email = mBinding.Email.getText().toString();
-            String Password = mBinding.Password.getText().toString();
-            String Phone = mBinding.Phone.getText().toString();
-
-            if (TextUtils.isEmpty(Name) || TextUtils.isEmpty(Email) || TextUtils.isEmpty(Password) || TextUtils.isEmpty(Phone)) {
-                mBinding.Name.setError("All Fields Are Required");
-                mBinding.Email.setError("");
-                mBinding.Password.setError("");
-                mBinding.Phone.setError("");
+            if (TextUtils.isEmpty ( Name ) || TextUtils.isEmpty ( Email ) || TextUtils.isEmpty ( Password ) || TextUtils.isEmpty ( Phone )) {
+                mBinding.Name.setError ( "All Fields Are Required" );
+                mBinding.Email.setError ( "" );
+                mBinding.Password.setError ( "" );
+                mBinding.Phone.setError ( "" );
             }
-            doRegister(Name, Email, Password, Phone);
-        });
+            doRegister ( Name , Email , Password , Phone );
+        } );
 
     }
 
-    private void doRegister(String name, String email, String password, String phone) {
+    private void doRegister ( String name , String email , String password , String phone ) {
 
-        Log.v("", name);
-        Log.v("", email);
-        Log.v("", password);
-        Log.v("", phone);
+        Log.v ( "" , name );
+        Log.v ( "" , email );
+        Log.v ( "" , password );
+        Log.v ( "" , phone );
 
 
 //        Registeration Using Firebase
@@ -92,22 +90,22 @@ public class Register extends AppCompatActivity {
 //
 //                });
 
-        Retrofit retrofit = AppConfig.getRetrofit();
-        Api service = retrofit.create(Api.class);
+        Retrofit retrofit = AppConfig.getRetrofit ( );
+        Api service = retrofit.create ( Api.class );
 
-        Call<ServerResponse> call = service.register(name, email, password, phone);
-        call.enqueue(new Callback<ServerResponse>() {
+        Call<ServerResponse> call = service.register ( name , email , password , phone );
+        call.enqueue ( new Callback<ServerResponse> ( ) {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse ( Call<ServerResponse> call , Response<ServerResponse> response ) {
 
-                if (response.body() != null) {
-                    ServerResponse serverResponse = response.body();
-                    if (!serverResponse.getError()) {
-                        Config.showToast(context, serverResponse.getMessage());
-                        Intent home = new Intent(Register.this, Login.class);
-                        startActivity(home);
+                if (response.body ( ) != null) {
+                    ServerResponse serverResponse = response.body ( );
+                    if (!serverResponse.getError ( )) {
+                        Config.showToast ( context , serverResponse.getMessage ( ) );
+                        Intent home = new Intent ( Register.this , Login.class );
+                        startActivity ( home );
                     } else {
-                        Config.showToast(context, serverResponse.getMessage());
+                        Config.showToast ( context , serverResponse.getMessage ( ) );
 
                     }
 
@@ -116,10 +114,10 @@ public class Register extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Config.showToast(context, t.getMessage());
+            public void onFailure ( Call<ServerResponse> call , Throwable t ) {
+                Config.showToast ( context , t.getMessage ( ) );
             }
-        });
+        } );
 
 
     }

@@ -32,118 +32,117 @@ public class Login extends AppCompatActivity {
 
 //    private FirebaseAuth mAuth;
 
-    private void updateUI(FirebaseUser currentUser) {
-        Intent dash = new Intent(Login.this, Dashboard.class);
-        startActivity(dash);
+    private void updateUI ( FirebaseUser currentUser ) {
+        Intent dash = new Intent ( Login.this , Dashboard.class );
+        startActivity ( dash );
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected void onCreate ( Bundle savedInstanceState ) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_login );
 
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        binding = ActivityLoginBinding.inflate ( getLayoutInflater ( ) );
+        View view = binding.getRoot ( );
+        setContentView ( view );
 
 //        mAuth = FirebaseAuth.getInstance();
 
-        binding.loginbtn.setOnClickListener(v -> {
-            Log.v("Login Button", "Works");
-            String Email = binding.Email.getText().toString();
-            String Password = binding.Password.getText().toString();
+        binding.loginbtn.setOnClickListener ( v -> {
+            Log.v ( "Login Button" , "Works" );
+            String Email = binding.Email.getText ( ).toString ( );
+            String Password = binding.Password.getText ( ).toString ( );
 
-            if (TextUtils.isEmpty(Email) || TextUtils.isEmpty(Password)) {
-                binding.Email.setError("All Fields Are Required");
-                binding.Password.setError("All Fields Are Required");
+            if (TextUtils.isEmpty ( Email ) || TextUtils.isEmpty ( Password )) {
+                binding.Email.setError ( "All Fields Are Required" );
+                binding.Password.setError ( "All Fields Are Required" );
             }
 
-            doLogin(Email, Password);
+            doLogin ( Email , Password );
 
-        });
-        binding.forgotpassbtn.setOnClickListener(v -> {
-            Log.v("ForgotPassBtn", "Works");
-            Intent fgtpass = new Intent(Login.this, ForgotPass.class);
-            startActivity(fgtpass);
-        });
+        } );
+        binding.forgotpassbtn.setOnClickListener ( v -> {
+            Log.v ( "ForgotPassBtn" , "Works" );
+            Intent fgtpass = new Intent ( Login.this , ForgotPass.class );
+            startActivity ( fgtpass );
+        } );
 
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        CheckSession();
+    protected void onStart () {
+        super.onStart ( );
+        CheckSession ( );
     }
 
-    private void CheckSession() {
+    private void CheckSession () {
         //   Check if user logged in
         //   If yes then move to dashboard
-        SessionManagement sessionManagement = new SessionManagement(Login.this);
-        int UsedId = sessionManagement.getSession();
+        SessionManagement sessionManagement = new SessionManagement ( Login.this );
+        int UsedId = sessionManagement.getSession ( );
 
         if (UsedId != -1) {
-            MoveToActivity();
+            MoveToActivity ( );
         } else {
             //   Do Nothing
         }
     }
 
-    private void MoveToActivity() {
-        startActivity(new Intent(Login.this, Dashboard.class));
+    private void MoveToActivity () {
+        startActivity ( new Intent ( Login.this , Dashboard.class ) );
     }
 
-    private void doLogin(String email, String password) {
+    private void doLogin ( String email , String password ) {
 
-        Log.v("Email", email);
-        Log.v("password", password);
-
-//        Firebase Authentication it Email and Password
-//
-//        mAuth.signInWithEmailAndPassword(email,password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()){
-//                            Toast.makeText(Login.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
-//                        }else{
-//                            Toast.makeText(Login.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
+        Log.v ( "Email" , email );
+        Log.v ( "password" , password );
 
 
-        Retrofit retrofit = AppConfig.getRetrofit();
-        Api service = retrofit.create(Api.class);
+        Retrofit retrofit = AppConfig.getRetrofit ( );
+        Api service = retrofit.create ( Api.class );
 
-        Call<ServerResponse> call = service.login(email, password);
-        call.enqueue(new Callback<ServerResponse>() {
+        Call<ServerResponse> call = service.login ( email , password );
+        call.enqueue ( new Callback<ServerResponse> ( ) {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse ( Call<ServerResponse> call , Response<ServerResponse> response ) {
 
-                if (response.body() != null) {
+                if (response.body ( ) != null) {
 
-                    ServerResponse serverResponse = response.body();
+                    ServerResponse serverResponse = response.body ( );
 
-                    if (!serverResponse.getError()) {
-                        Config.showToast(context, serverResponse.getMessage());
-                        User user = new User(1, email);
-                        SessionManagement sessionManagement = new SessionManagement(Login.this);
-                        sessionManagement.saveSession(user);
-                        MoveToActivity();
+                    if (!serverResponse.getError ( )) {
+                        Config.showToast ( context , serverResponse.getMessage ( ) );
+                        Call<ServerResponse> data = service.login_data ( email , password );
+                        data.enqueue ( new Callback<ServerResponse> ( ) {
+                            @Override
+                            public void onResponse ( Call<ServerResponse> call , Response<ServerResponse> response ) {
+                                if (response.body ( ) != null) {
+                                    ServerResponse serverResponse1 = response.body ( );
+                                    Log.e ( "" , String.valueOf ( serverResponse1 ) );
+                                }
+                            }
+
+                            @Override
+                            public void onFailure ( Call<ServerResponse> call , Throwable t ) {
+
+                            }
+                        } );
+                        User user = new User ( 1 , email );
+                        SessionManagement sessionManagement = new SessionManagement ( Login.this );
+                        sessionManagement.saveSession ( user );
+                        MoveToActivity ( );
                     } else {
-                        Config.showToast(context, serverResponse.getMessage());
+                        Config.showToast ( context , serverResponse.getMessage ( ) );
 
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Config.showToast(context, t.getMessage());
+            public void onFailure ( Call<ServerResponse> call , Throwable t ) {
+                Config.showToast ( context , t.getMessage ( ) );
             }
-        });
+        } );
 
 
     }

@@ -3,7 +3,7 @@ package com.alokrathava.traveller.dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,8 +16,21 @@ import com.alokrathava.traveller.R;
 import com.alokrathava.traveller.SessionManagement.SessionManagement;
 import com.alokrathava.traveller.auth.Login;
 import com.alokrathava.traveller.databinding.ActivityDashboardBinding;
+import com.alokrathava.traveller.network.Api;
+import com.alokrathava.traveller.network.AppConfig;
+import com.alokrathava.traveller.network.ServerResponse;
 import com.alokrathava.traveller.utils.Config;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.navigation.NavigationView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -27,6 +40,7 @@ public class Dashboard extends AppCompatActivity {
     NavigationView nav;
     private ActivityDashboardBinding binding;
     private androidx.appcompat.widget.Toolbar mtoolbar;
+    private String TripDate;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -57,12 +71,6 @@ public class Dashboard extends AppCompatActivity {
                     mDrawerLayout.closeDrawer ( GravityCompat.START );
                     break;
 
-                case R.id.order:
-                    Toast.makeText ( Dashboard.this , "Order" , Toast.LENGTH_SHORT ).show ( );
-//                    Intent order = new Intent(Home.this,Order.class);
-//                    view.getContext().startActivity(order);
-                    mDrawerLayout.closeDrawer ( GravityCompat.START );
-                    break;
                 case R.id.air:
                     startActivity ( new Intent ( Dashboard.this , AirTicketsWeb.class ) );
                     Config.showToast ( context , "Air" );
@@ -90,6 +98,32 @@ public class Dashboard extends AppCompatActivity {
             return true;
         } );
 
+//        Material Date Picker
+        binding.selectdate.setOnClickListener ( v -> {
+            MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker ( );
+            materialDateBuilder.setTitleText ( "Start Date" );
+            final MaterialDatePicker materialDatePicker = materialDateBuilder.build ( );
+            materialDatePicker.show ( getSupportFragmentManager ( ) , "MATERIAL_DATE_PICKER" );
+            materialDatePicker.addOnPositiveButtonClickListener (
+                    selection -> {
+                        SimpleDateFormat spf = new SimpleDateFormat ( "MMM dd, yyyy" );
+                        Date newDate = null;
+                        try {
+                            newDate = spf.parse ( materialDatePicker.getHeaderText ( ) );
+                        } catch ( ParseException e ) {
+                            e.printStackTrace ( );
+                        }
+                        spf      = new SimpleDateFormat ( "dd/MM/yyyy" );
+                        TripDate = spf.format ( newDate );
+                        binding.selectdate.setText ( TripDate );
+                    } );
+
+        } );
+
+        binding.BagInfobtn.setOnClickListener ( v -> startActivity ( new Intent ( Dashboard.this , Baggage.class ) ) );
+
+        binding.Docbtn.setOnClickListener ( v -> startActivity ( new Intent ( Dashboard.this , Baggage.class ) ) );
+
         binding.addnewtrip.setOnClickListener ( v -> {
             newTrip ( );
         } );
@@ -102,13 +136,37 @@ public class Dashboard extends AppCompatActivity {
         String Email = binding.email.getText ( ).toString ( );
         String Source = binding.Source.getText ( ).toString ( );
         String Destination = binding.Destination.getText ( ).toString ( );
-//       String Date = binding.selectdate.getText ().toString ();
 
-        Log.e ( "" , Name );
-        Log.e ( "" , Email );
-        Log.e ( "" , Source );
-        Log.e ( "" , Destination );
-//        Log.e ( "",Date);
+        if (!(!TextUtils.isEmpty ( Name ) && !TextUtils.isEmpty ( Email ) && !TextUtils.isEmpty ( Source ) && !TextUtils.isEmpty ( Destination ) && !TextUtils.isEmpty ( TripDate ))) {
+            binding.name.setError ( "All fields are required!!" );
+            binding.email.setError ( "All fields are required!!" );
+            binding.Source.setError ( "All fields are required!!" );
+            binding.Destination.setError ( "All fields are required!!" );
+        }
+
+        Retrofit retrofit = AppConfig.getRetrofit ( );
+        Api service = retrofit.create ( Api.class );
+        Call<ServerResponse> call = service.newtrip ( Name , Email , Source , Destination , TripDate );
+        call.enqueue ( new Callback<ServerResponse> ( ) {
+            @Override
+            public void onResponse ( Call<ServerResponse> call , Response<ServerResponse> response ) {
+                if (response.body ( ) != null) {
+                    ServerResponse serverResponse = response.body ( );
+                    if (!serverResponse.getError ( )) {
+                        Config.showToast ( context , serverResponse.getMessage ( ) );
+                    } else {
+                        Config.showToast ( context , serverResponse.getMessage ( ) );
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure ( Call<ServerResponse> call , Throwable t ) {
+
+            }
+        } );
 
     }
 

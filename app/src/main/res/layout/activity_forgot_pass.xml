@@ -39,18 +39,6 @@
             android:textSize="25dp" />
 
 
-        <EditText
-            android:id="@+id/NewPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/btntransparent"
-            android:hint="@string/forgot_hint_newpass"
-            android:inputType="textPassword"
-            android:padding="5dp"
-            android:textColor="@color/black"
-            android:textSize="25dp" />
-
         <Button
             android:id="@+id/forgotpassbtnbtn"
             android:layout_width="wrap_content"
