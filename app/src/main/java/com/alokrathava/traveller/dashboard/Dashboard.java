@@ -82,12 +82,6 @@ public class Dashboard extends AppCompatActivity {
                     startActivity ( new Intent ( Dashboard.this , TrainTicketWeb.class ) );
                     mDrawerLayout.closeDrawer ( (GravityCompat.START) );
                     break;
-                case R.id.history:
-                    Toast.makeText ( Dashboard.this , "History" , Toast.LENGTH_LONG ).show ( );
-//                    Intent history = new Intent(Home.this,History.class);
-//                    view.getContext().startActivity(history);
-                    mDrawerLayout.closeDrawer ( GravityCompat.START );
-                    break;
 
                 case R.id.logout:
                     Toast.makeText ( Dashboard.this , "Logout" , Toast.LENGTH_SHORT ).show ( );

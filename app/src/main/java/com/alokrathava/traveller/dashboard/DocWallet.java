@@ -68,6 +68,7 @@ public class DocWallet extends AppCompatActivity {
             switch (item.getItemId ( )) {
 
                 case R.id.home:
+                    startActivity ( new Intent ( DocWallet.this , Dashboard.class ) );
                     Toast.makeText ( DocWallet.this , "Home" , Toast.LENGTH_SHORT ).show ( );
                     mDrawerLayout.closeDrawer ( GravityCompat.START );
                     break;
@@ -82,13 +83,6 @@ public class DocWallet extends AppCompatActivity {
                     startActivity ( new Intent ( DocWallet.this , TrainTicketWeb.class ) );
                     mDrawerLayout.closeDrawer ( (GravityCompat.START) );
                     break;
-                case R.id.history:
-                    Toast.makeText ( DocWallet.this , "History" , Toast.LENGTH_LONG ).show ( );
-//                    Intent history = new Intent(Home.this,History.class);
-//                    view.getContext().startActivity(history);
-                    mDrawerLayout.closeDrawer ( GravityCompat.START );
-                    break;
-
                 case R.id.logout:
                     Toast.makeText ( DocWallet.this , "Logout" , Toast.LENGTH_SHORT ).show ( );
                     LogOut ( );
