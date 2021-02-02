@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
     private final Context context = this;
     private ActivityLoginBinding binding;
     /*--------------------------------Variable Declaration----------------------------------------*/
+    private static final String TAG = "LOGIN";
 
 
     @Override
@@ -82,11 +83,11 @@ public class Login extends AppCompatActivity {
         startActivity ( new Intent ( Login.this , Dashboard.class ) );
     }
 
+    /*----------------------------------------------Login-----------------------------------------*/
     private void doLogin ( String email , String password ) {
 
-        Log.v ( "Email" , email );
-        Log.v ( "password" , password );
-
+        Log.v ( TAG , email );
+        Log.v ( TAG , password );
 
         Retrofit retrofit = AppConfig.getRetrofit ( );
         Api service = retrofit.create ( Api.class );
@@ -108,7 +109,8 @@ public class Login extends AppCompatActivity {
                             public void onResponse ( Call<ServerResponse> call , Response<ServerResponse> response ) {
                                 if (response.body ( ) != null) {
                                     ServerResponse serverResponse1 = response.body ( );
-                                    Log.e ( "" , String.valueOf ( serverResponse1 ) );
+                                    fetchData ( email , password );
+//                                    Log.e ( "TAG" , String.valueOf ( serverResponse1 ) );
                                 }
                             }
 
@@ -134,6 +136,34 @@ public class Login extends AppCompatActivity {
             }
         } );
 
+
+    }
+
+    /*----------------------------------------------Fetch Login Data--------------------------------*/
+    private void fetchData ( String email , String password ) {
+        Log.e ( TAG , email );
+        Log.e ( TAG , password );
+
+        Retrofit retrofit = AppConfig.getRetrofit ( );
+        Api service = retrofit.create ( Api.class );
+
+        Call<ServerResponse> call = service.login_data ( email , password );
+        call.enqueue ( new Callback<ServerResponse> ( ) {
+            @Override
+            public void onResponse ( Call<ServerResponse> call , Response<ServerResponse> response ) {
+                if (response.body ( ) != null) {
+                    ServerResponse serverResponse1 = response.body ( );
+
+                } else {
+                    Config.showToast ( context , "No Data Found" );
+                }
+            }
+
+            @Override
+            public void onFailure ( Call<ServerResponse> call , Throwable t ) {
+
+            }
+        } );
 
     }
 }

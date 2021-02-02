@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,40 +54,6 @@ public class Register extends AppCompatActivity {
     }
 
     private void doRegister ( String name , String email , String password , String phone ) {
-
-        Log.v ( "" , name );
-        Log.v ( "" , email );
-        Log.v ( "" , password );
-        Log.v ( "" , phone );
-
-
-//        Registeration Using Firebase
-
-//        mAuth.createUserWithEmailAndPassword(email,password)
-//                .addOnCompleteListener(task -> {
-//
-//                    if (task.isSuccessful()){
-//                        User user =new User(name,email,password,phone);
-//
-//                        FirebaseDatabase.getInstance().getReference("Users")
-//                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task1) {
-//                                if (task1.isSuccessful()) {
-//                                    Toast.makeText(Register.this, "Registeration Successfull", Toast.LENGTH_SHORT).show();
-//                                    Intent login = new Intent(Register.this, Login.class);
-//                                    Register.this.startActivity(login);
-//                                } else {
-//                                    Toast.makeText(Register.this, "Error In Registeration", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//                        }else{
-//                        Toast.makeText(this, "Failed To Register Please Try Again", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                });
 
         Retrofit retrofit = AppConfig.getRetrofit ( );
         Api service = retrofit.create ( Api.class );

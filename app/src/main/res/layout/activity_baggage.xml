@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".dashboard.Baggage">
+    android:id="@+id/drawer"
+    tools:context=".dashboard.Baggage"
+    tools:openDrawer="start">
 
 
     <RelativeLayout
@@ -56,6 +58,7 @@
                 android:background="@drawable/border"
                 android:backgroundTint="#eeeeee"
                 android:hint="No Of Bags."
+                android:inputType="number"
                 android:textColorHint="@color/black" />
 
             <EditText
@@ -69,6 +72,7 @@
                 android:textColorHint="@color/black" />
 
             <Button
+                android:id="@+id/reminderbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15sp"
@@ -92,4 +96,4 @@
         app:menu="@menu/iconmenu" />
 
 
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

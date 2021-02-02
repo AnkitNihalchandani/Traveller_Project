@@ -7,7 +7,6 @@ import retrofit2.http.POST;
 
 public interface Api {
 
-
     String my_url = "Api.php?apicall=";
 
     @FormUrlEncoded
@@ -50,4 +49,13 @@ public interface Api {
             @Field("pwd") String mPwd ,
             @Field("email") String mEmail
     );
+
+    @FormUrlEncoded
+    @POST(my_url + "baggagedetails")
+    Call<ServerResponse> baggage (
+            @Field("terminalNo") String mterminalNo ,
+            @Field("noOfBags") String mnoOfBags ,
+            @Field("ticketNo") String mticketNo
+    );
+
 }

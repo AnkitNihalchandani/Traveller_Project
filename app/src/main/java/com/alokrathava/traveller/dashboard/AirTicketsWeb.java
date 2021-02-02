@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alokrathava.traveller.R;
+import com.alokrathava.traveller.databinding.ActivityAirTicketsWebBinding;
 
 public class AirTicketsWeb extends AppCompatActivity {
 
@@ -19,14 +20,18 @@ public class AirTicketsWeb extends AppCompatActivity {
     View view;
 
     private androidx.appcompat.widget.Toolbar mtoolbar;
-
+    private ActivityAirTicketsWebBinding binding;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_air_tickets_web );
 
-        mtoolbar = findViewById ( R.id.toolbar );
+        binding = ActivityAirTicketsWebBinding.inflate ( getLayoutInflater ( ) );
+        View view = binding.getRoot ( );
+        setContentView ( view );
+
+        mtoolbar = binding.toolbar;
         setSupportActionBar ( mtoolbar );
 
 
