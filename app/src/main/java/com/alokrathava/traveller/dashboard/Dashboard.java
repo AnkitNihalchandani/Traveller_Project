@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -40,13 +41,13 @@ public class Dashboard extends AppCompatActivity {
     NavigationView nav;
     private ActivityDashboardBinding binding;
     private androidx.appcompat.widget.Toolbar mtoolbar;
+    /*------------------------------------Variable Declaration-------------------------------------*/
     private String TripDate;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_dashboard );
-
         binding = ActivityDashboardBinding.inflate ( getLayoutInflater ( ) );
         View view = binding.getRoot ( );
         setContentView ( view );
@@ -98,7 +99,7 @@ public class Dashboard extends AppCompatActivity {
             return true;
         } );
 
-//        Material Date Picker
+        /*--------------------------------------Material Date Picker-------------------------------*/
         binding.selectdate.setOnClickListener ( v -> {
             MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker ( );
             materialDateBuilder.setTitleText ( "Start Date" );
@@ -119,10 +120,22 @@ public class Dashboard extends AppCompatActivity {
                     } );
 
         } );
+        /*--------------------------------------Buttons-------------------------------------------*/
+        binding.BagInfobtn.setOnClickListener ( v -> {
+            startActivity ( new Intent ( Dashboard.this , Baggage.class ) );
+            Log.e ( "" , "BagBtn" );
+        } );
 
-        binding.BagInfobtn.setOnClickListener ( v -> startActivity ( new Intent ( Dashboard.this , Baggage.class ) ) );
-
-        binding.Docbtn.setOnClickListener ( v -> startActivity ( new Intent ( Dashboard.this , Baggage.class ) ) );
+        binding.Docbtn.setOnClickListener ( v -> {
+            startActivity ( new Intent ( Dashboard.this , DocWallet.class ) );
+            Log.e ( "" , "BagBtn" );
+        } );
+        binding.taxibtn.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                startActivity ( new Intent ( Dashboard.this , TaxiBook.class ) );
+            }
+        } );
 
         binding.addnewtrip.setOnClickListener ( v -> {
             newTrip ( );

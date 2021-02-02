@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Traveller"
         android:usesCleartextTraffic="true">
-        <activity android:name=".auth.ForgotPass">
+        <activity android:name=".dashboard.Dashboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,8 +22,11 @@
         <activity android:name=".dashboard.TrainTicketWeb" />
         <activity android:name=".MainActivity" />
         <activity android:name=".auth.Register" />
-        <activity android:name=".dashboard.Dashboard" />
+        <activity android:name=".auth.ForgotPass" />
         <activity android:name=".auth.Login" />
+        <activity android:name=".dashboard.Baggage" />
+        <activity android:name=".dashboard.DocWallet" />
+        <activity android:name=".dashboard.TaxiBook" />
     </application>
 
 </manifest>

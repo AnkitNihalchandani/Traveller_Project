@@ -137,7 +137,7 @@
                 android:layout_marginBottom="25sp"
                 android:paddingTop="20sp">
 
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/BagInfobtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

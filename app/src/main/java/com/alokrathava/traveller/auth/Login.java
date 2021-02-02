@@ -18,7 +18,6 @@ import com.alokrathava.traveller.network.Api;
 import com.alokrathava.traveller.network.AppConfig;
 import com.alokrathava.traveller.network.ServerResponse;
 import com.alokrathava.traveller.utils.Config;
-import com.google.firebase.auth.FirebaseUser;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,13 +28,8 @@ public class Login extends AppCompatActivity {
 
     private final Context context = this;
     private ActivityLoginBinding binding;
+    /*--------------------------------Variable Declaration----------------------------------------*/
 
-//    private FirebaseAuth mAuth;
-
-    private void updateUI ( FirebaseUser currentUser ) {
-        Intent dash = new Intent ( Login.this , Dashboard.class );
-        startActivity ( dash );
-    }
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -45,8 +39,6 @@ public class Login extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate ( getLayoutInflater ( ) );
         View view = binding.getRoot ( );
         setContentView ( view );
-
-//        mAuth = FirebaseAuth.getInstance();
 
         binding.loginbtn.setOnClickListener ( v -> {
             Log.v ( "Login Button" , "Works" );
@@ -62,9 +54,7 @@ public class Login extends AppCompatActivity {
 
         } );
         binding.forgotpassbtn.setOnClickListener ( v -> {
-            Log.v ( "ForgotPassBtn" , "Works" );
-            Intent fgtpass = new Intent ( Login.this , ForgotPass.class );
-            startActivity ( fgtpass );
+            startActivity ( new Intent ( Login.this , ForgotPass.class ) );
         } );
 
     }

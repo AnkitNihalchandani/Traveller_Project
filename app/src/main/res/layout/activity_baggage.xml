@@ -21,6 +21,65 @@
             app:titleMarginStart="10dp"
             app:titleTextColor="@color/white" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="45sp"
+            android:orientation="vertical"
+            android:padding="30sp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30sp"
+                android:text="Baggage Reminder"
+                android:textAlignment="textStart"
+                android:textColor="#212121"
+                android:textSize="40sp" />
+
+            <EditText
+                android:id="@+id/TermainalId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45sp"
+                android:background="@drawable/border"
+                android:backgroundTint="#eeeeee"
+                android:hint="Terminal No."
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/NoOfBags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:background="@drawable/border"
+                android:backgroundTint="#eeeeee"
+                android:hint="No Of Bags."
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/TicketNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:background="@drawable/border"
+                android:backgroundTint="#eeeeee"
+                android:hint="Ticket No."
+                android:textColorHint="@color/black" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:backgroundTint="@color/primary_dark"
+                android:padding="8sp"
+                android:text="Remind Me " />
+
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 
